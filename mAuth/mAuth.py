@@ -29,5 +29,5 @@ class miniAuth(object):
         res = self.sqlWrite.execute(sql)
         return res
 
-    def userNew(self, email, password, ip):
+    def userInsert(self, email, password, ip):
         return
