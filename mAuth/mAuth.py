@@ -30,4 +30,11 @@ class miniAuth(object):
         return res
 
     def userInsert(self, email, password, ip):
-        return
+        sql = '''
+        INSERT INTO user_basic
+        (email, password, register_time, register_ip)
+        VALUES ("%s", "%s", %s, "%s")
+        '''
+        now = int(time.time())
+        res = self.sqlWrite.execute_rowcount(sql, (email, password, now, ip))
+        return res > 0
