@@ -33,7 +33,7 @@ class miniAuth(object):
         sql = '''
         INSERT INTO user_basic
         (email, password, register_time, register_ip)
-        VALUES ("%s", "%s", %s, "%s")
+        VALUES (%s, %s, %s, %s)
         '''
         now = int(time.time())
         res = self.sqlWrite.execute(sql, email, password, now, ip)
@@ -67,7 +67,7 @@ class miniAuth(object):
         sql = '''
         SELECT uid, email, nick, status, activated, locked, register_time, register_ip
         FROM user_basic
-        WHERE email = "%s"
+        WHERE email = %s
         '''
         res = self.sqlRead.get(sql, email,)
         return res
@@ -92,7 +92,7 @@ class miniAuth(object):
         sql = '''
         UPDATE user_basic
         SET locked=1
-        WHERE email="%s" AND locked=0
+        WHERE email=%s AND locked=0
         '''
         res = self.sqlWrite.execute_rowcount(sql, email)
         return res > 0
@@ -117,7 +117,7 @@ class miniAuth(object):
         sql = '''
         UPDATE user_basic
         SET locked=0
-        WHERE email="%s" AND locked=1
+        WHERE email=%s AND locked=1
         '''
         res = self.sqlWrite.execute_rowcount(sql, email)
         return res > 0
@@ -142,7 +142,7 @@ class miniAuth(object):
         sql = '''
         UPDATE user_basic
         SET activated=1
-        WHERE email="%s" AND activated=0
+        WHERE email=%s AND activated=0
         '''
         res = self.sqlWrite.execute_rowcount(sql, email)
         return res > 0
